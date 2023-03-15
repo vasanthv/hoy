@@ -1,0 +1,54 @@
+{
+	"name": "hoy",
+	"version": "0.1.7",
+	"description": "Send push notifications to friends",
+	"main": "start.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"gen:vapid": "node ./scripts/generate-vapid-keys.js",
+		"start": "node ./scripts/set-sw-version.js && node start.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/vasanthv/hoy.git"
+	},
+	"keywords": [
+		"web",
+		"push",
+		"push",
+		"api"
+	],
+	"author": "Vasanth V <imvasanthv@gmail.com>",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/vasanthv/hoy/issues"
+	},
+	"homepage": "https://github.com/vasanthv/hoy#readme",
+	"dependencies": {
+		"aws-sdk": "^2.1305.0",
+		"axios": "^1.2.2",
+		"body-parser": "^1.20.1",
+		"connect-mongo": "^4.6.0",
+		"crypto": "^1.0.1",
+		"express": "^4.18.2",
+		"express-rate-limit": "^6.7.0",
+		"express-session": "^1.17.3",
+		"flat-color-generator": "^1.0.1",
+		"generate-api-key": "^1.0.2",
+		"html-to-text": "^9.0.3",
+		"mongoose": "^6.9.0",
+		"morgan": "^1.10.0",
+		"mustache": "^4.2.0",
+		"page": "^1.11.6",
+		"randomstring": "^1.2.3",
+		"ua-parser-js": "^1.0.34",
+		"uuid": "^9.0.0",
+		"vue": "^3.2.45",
+		"vue3-sfc-loader": "^0.8.4",
+		"web-push": "^3.5.0"
+	},
+	"devDependencies": {
+		"@babel/eslint-parser": "^7.5.4",
+		"eslint": "^8.29.0"
+	}
+}

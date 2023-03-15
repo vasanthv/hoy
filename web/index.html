@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Cache-control" content="public" />
+		<meta
+			name="viewport"
+			content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, viewport-fit=cover"
+		/>
+		<meta name="description" content="Hoy lets you hoy your friends." />
+		<meta name="keywords" content="hoy, push notifications, web push" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+		<!-- Icons & Theme-->
+		<meta name="theme-color" content="#000" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="mask-icon" href="/mask-icon.svg" color="#000" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/manifest.json" />
+		<link type="text/plain" rel="author" href="/humans.txt" />
+
+		<!-- Meta data for link fetching -->
+		<meta property="og:url" content="https://hoy.im" />
+		<meta property="og:image" content="https://hoy.im/banner.png" />
+		<meta property="og:title" content="Hoy!" />
+		<meta property="og:description" content="Just HOY!" />
+		<title>Hoy</title>
+		<!-- Site scripts & styles -->
+		<link href="/style.css" rel="stylesheet" />
+
+		<script defer src="/vue.global.prod.js"></script>
+		<script defer src="/vue3-sfc-loader.js"></script>
+		<script defer src="/axios.min.js"></script>
+		<script defer src="/page.js"></script>
+		<script defer src="/script.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<section id="toast" v-bind:class="toast.type + (toast.message ? ' show' : '')" v-on:click="toast.message = ''">
+				{{toast.message}}
+			</section>
+
+			<main id="app-containter" class="wrap" v-bind:style="'display:block;'">
+				<header class="flex vmiddle row" v-if="page != 'intro'">
+					<a href="/" class="button icon-arrow-left" v-if="showBackButton"></a>
+					<div class="flex-1 title bold">{{pageTitle}}</div>
+
+					<a href="/account" class="button icon-gear" v-if="isLoggedIn"></a>
+				</header>
+
+				<section id="register" v-if="page === 'register'">
+					<div class="row">
+						<label class="bold">Username or Handle</label>
+						<input type="text" name="username" placeholder="Enter your Username" v-model="newAccount.handle" />
+					</div>
+
+					<div class="row">
+						<label class="bold">Email address</label>
+						<input type="email" name="email" placeholder="Enter your email" v-model="newAccount.email" />
+					</div>
+
+					<div class="row">
+						<label class="bold">Password</label>
+						<input
+							type="password"
+							name="password"
+							placeholder="Enter your password"
+							v-model="newAccount.password"
+							v-on:keydown.enter="signup"
+						/>
+					</div>
+
+					<div class="row">
+						<button class="bold" v-on:click="signup">Sign up</button>
+					</div>
+					<div class="row small">Already have an account? <a href="/login" class="bold">Log in</a></div>
+				</section>
+
+				<!-- Login section -->
+				<section id="login" v-if="page === 'login'">
+					<div class="row">
+						<label class="bold">Username</label>
+						<input type="text" name="username" placeholder="Enter your Username / Email" v-model="authCreds.handle" />
+					</div>
+
+					<div class="row">
+						<label class="bold">Password</label>
+						<input
+							type="password"
+							name="password"
+							placeholder="Enter your password"
+							v-model="authCreds.password"
+							v-on:keydown.enter="login"
+						/>
+					</div>
+
+					<div class="row flex vmiddle">
+						<button class="bold" v-on:click="login">Log in</button>
+						&nbsp;&nbsp;&nbsp;
+						<a href="javascript:void(0)" class="gray" v-on:click="forgotPassword">Forgot password?</a>
+					</div>
+					<div class="row small">Don't have an account? <a href="/signup" class="bold">Sign up</a></div>
+				</section>
+
+				<onboard
+					v-if="isLoggedIn && !userOnboarded"
+					:notificationrequestclickhandler="notificationRequestClickHandler"
+					:onboardmeta="onboardMeta"
+				></onboard>
+
+				<section id="home" v-if="page === 'home'">
+					<contact
+						v-if="selectedContacts.length > 1"
+						id="multiSelectedContacts"
+						:handle="me.handle"
+						:hoyhandle="selectedContacts"
+						:color="'white'"
+						:label="'Selected <span class=\'small light\'>('+selectedContacts.length+'/100)</span>'"
+						:ischecked="true"
+						:showtextbox="true"
+						:text="text"
+						:ontextchange="onTextChange"
+						:sendhoy="sendHoy"
+						:oncheck="removeSelectedContacts"
+					></contact>
+
+					<contact
+						v-if="me.handle"
+						:handle="me.handle"
+						:hoyhandle="[me.handle]"
+						:color="me.color"
+						:label="me.handle + ' <span class=\'small light\'>(That\'s you)</span>'"
+						:ischecked="selectedContacts.includes(me.handle)"
+						:showtextbox="selectedContacts.length === 1 && selectedContacts.includes(me.handle)"
+						:text="text"
+						:ontextchange="onTextChange"
+						:sendhoy="sendHoy"
+						:oncheck="toggleSelectContact"
+					></contact>
+
+					<contact
+						v-for="(contact, i) in homeContacts"
+						:key="contact._id"
+						:handle="contact.handle"
+						:hoyhandle="[contact.handle]"
+						:color="contact.color"
+						:label="contact.handle"
+						:ischecked="selectedContacts.includes(contact.handle)"
+						:showtextbox="selectedContacts.length === 1 && selectedContacts.includes(contact.handle)"
+						:text="text"
+						:ontextchange="onTextChange"
+						:sendhoy="sendHoy"
+						:oncheck="toggleSelectContact"
+						:enableremovecontact="true"
+						:removecontact="removeContact"
+					></contact>
+
+					<div class="item addFriend">
+						<div class="flex vmiddle">
+							<div class="icon-plus"></div>
+							<div class="flex-1">
+								<input
+									type="text"
+									v-model="userIdentifier"
+									v-bind:placeholder="addUserPlaceholder"
+									v-on:focus="addUserFieldFocused = true"
+									v-on:blur="addUserFieldFocused = false"
+									v-on:keydown.enter="addContact(userIdentifier)"
+								/>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<account
+					id="account"
+					v-if="page === 'account'"
+					:account="account"
+					:handle="handle"
+					:updateaccount="updateAccount"
+					:blockcontact="blockContact"
+					:unblockcontact="unblockContact"
+					:deletebrowser="deleteBrowser"
+					:logout="logout"
+				></account>
+			</main>
+
+			<intro id="intro" v-if="page === 'intro'" v-bind:style="'display:block;'"></intro>
+			<legal id="legal" v-if="page === 'legal'" v-bind:style="'display:block;'"></legal>
+		</div>
+		<script async defer src="https://cabin.hoy.im/hello.js"></script>
+	</body>
+</html>

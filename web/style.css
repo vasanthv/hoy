@@ -1,0 +1,237 @@
+@import "/icomoon/style.css";
+
+:root {
+	--background: #fff;
+	--text: 0, 0, 0;
+	--opacity: 0.2;
+	--white: 250, 250, 250;
+	--red: #c0392b;
+	--green: #27ae60;
+	--blue: #2990f9;
+}
+* {
+	outline: 0;
+	-webkit-overflow-scrolling: touch;
+}
+body {
+	background: var(--background);
+	color: rgb(var(--text));
+	margin: 0;
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+		"Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: 1.2rem;
+	line-height: 1.5;
+}
+a {
+	color: inherit;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+	display: block;
+	border: 0.2rem solid rgb(var(--text));
+	background: var(--background);
+	color: rgb(var(--text));
+	font-family: inherit;
+	font-size: 1.25rem;
+	width: 100%;
+	height: 3.2rem;
+	max-width: 420px;
+	padding: 0px 1rem;
+	border-radius: 0.2rem;
+	box-sizing: border-box;
+}
+input[type="search"] {
+	background: var(--background);
+	color: rgb(var(--text));
+	display: block;
+	border: none;
+	padding: 0rem;
+	border-radius: 0.25rem;
+	box-sizing: border-box;
+	font: inherit;
+	width: 100%;
+	height: 2.5rem;
+}
+input::placeholder {
+	color: rgba(var(--text), calc(var(--opacity) * 2));
+}
+button,
+a.button {
+	display: inline-block;
+	background: rgb(var(--text));
+	color: var(--background);
+	border: none;
+	border-radius: 0.2rem;
+	height: 3.2rem;
+	line-height: 3.2rem;
+	font-family: inherit;
+	font-size: 1.25rem;
+	font-weight: bold;
+	padding: 0px 1.5rem;
+	cursor: pointer;
+	text-decoration: none;
+}
+button.red {
+	background: var(--red);
+}
+label {
+	font-weight: bold;
+}
+.wrap {
+	width: 100%;
+	max-width: 640px;
+	margin: auto;
+}
+.row {
+	padding: 0px 1rem;
+	margin: 1.25rem auto;
+}
+.title {
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+.light {
+	color: rgba(var(--text), calc(var(--opacity) * 3));
+}
+.red {
+	color: var(--red);
+}
+.bold {
+	font-weight: bold;
+}
+.small {
+	font-size: 0.75em;
+}
+.large {
+	font-size: 2rem;
+}
+.flex {
+	display: flex;
+}
+.flex-1 {
+	flex: 1;
+}
+.flex.vmiddle {
+	align-items: center;
+}
+
+#app-containter,
+#intro,
+#legal {
+	display: none;
+}
+#toast {
+	background-color: var(--text);
+	color: var(--background);
+	text-align: center;
+	border-radius: 0.1rem;
+	box-sizing: border-box;
+	position: fixed;
+	z-index: 10;
+	left: 0px;
+	right: 0px;
+	top: 0rem;
+	max-height: 0;
+	line-height: 2;
+	margin: auto;
+	overflow: hidden;
+	transition: max-height 0.25s ease-in;
+}
+#toast.show {
+	max-height: 5rem;
+}
+#toast.error {
+	background: var(--red);
+}
+#toast.success {
+	background: var(--green);
+}
+header .button {
+	background: none;
+	color: rgb(var(--text));
+	padding: 0rem;
+	height: 2.4rem;
+	width: 2.4rem;
+	font-size: 1.5rem;
+	line-height: 2.4rem;
+	text-align: center;
+	border-radius: 50%;
+	margin-right: 1rem;
+}
+header .button:hover {
+	background: rgba(var(--text), calc(var(--opacity)));
+}
+header .button:last-child {
+	margin: 0px;
+}
+#home .item {
+	font-size: 1.25rem;
+	line-height: 1.25rem;
+	font-weight: bold;
+	padding: 0.75rem 1rem;
+	margin: 0.75rem 0px;
+}
+#home .item [class^="icon-"],
+#home .item [class*=" icon-"] {
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+	margin-right: 0.5rem;
+	cursor: pointer;
+}
+#home .item .icon-circle:hover,
+#home .item .icon-circle:active {
+	transform: scale(1.1);
+}
+#home .item .checkbox {
+	color: rgba(var(--text), calc(var(--opacity) * 2));
+}
+#home .item .textHoy {
+	display: none;
+}
+#home .item.checked {
+	background: rgb(var(--text));
+	color: rgb(var(--white));
+}
+#home .item.checked .light {
+	color: rgba(var(--white), calc(var(--opacity) * 3));
+}
+#home .item.checked .textHoy {
+	display: block;
+}
+#home .item.checked .checkbox {
+	color: rgb(var(--white));
+}
+#home .item .handle {
+	cursor: pointer;
+}
+#home .item .chars {
+	margin-right: 0.5rem;
+}
+#home .item input {
+	color: rgb(var(--white));
+	background: none;
+	max-width: 100%;
+	padding: 0px;
+	border: none;
+}
+#home .item.checked input::placeholder {
+	color: rgba(var(--white), calc(var(--opacity) * 3));
+}
+#home #multiSelectedContacts {
+	position: sticky;
+	top: 0px;
+	background: #6549d5;
+}
+#home .addFriend input {
+	color: rgb(var(--text));
+	border: none;
+	padding: 0;
+	height: auto;
+	font-weight: bold;
+}
+#home .addFriend input::placeholder {
+	color: rgb(var(--text));
+}

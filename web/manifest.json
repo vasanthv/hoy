@@ -1,0 +1,28 @@
+{
+	"name": "Hoy",
+	"short_name": "Hoy",
+	"description": "Send push notifications to your friend's browser",
+	"icons": [
+		{
+			"src": "icon.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "any"
+		},
+		{
+			"src": "icon-maskable.png",
+			"sizes": "512x512",
+			"type": "image/png",
+			"purpose": "maskable"
+		},
+		{
+			"src": "favicon.svg",
+			"sizes": "any"
+		}
+	],
+	"theme_color": "#000",
+	"background_color": "#000",
+	"display": "standalone",
+	"start_url": "/",
+	"permissions": ["notifications"]
+}

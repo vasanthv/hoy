@@ -76,6 +76,7 @@ a.button {
 }
 button.red {
 	background: var(--red);
+	color: rgb(var(--white)) !important;
 }
 label {
 	font-weight: bold;
@@ -181,9 +182,6 @@ header .button:last-child {
 	margin-right: 0.5rem;
 	cursor: pointer;
 }
-#home .item .icon-remove {
-	margin-right: 1rem;
-}
 #home .item .icon-circle:hover,
 #home .item .icon-circle:active {
 	transform: scale(1.1);
@@ -210,8 +208,9 @@ header .button:last-child {
 #home .item .handle {
 	cursor: pointer;
 }
-#home .item .chars {
-	margin-right: 0.5rem;
+#home .item .chars,
+#home .item .icon-remove {
+	margin-right: 1rem;
 }
 #home .item input {
 	color: rgb(var(--white));

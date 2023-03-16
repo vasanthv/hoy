@@ -400,7 +400,7 @@ const deletePushCredentials = async (req, res, next) => {
 	try {
 		const id = req.params.id;
 		await Users.updateOne({ _id: req.user._id }, { $pull: { devices: { _id: id } } });
-		res.json({ message: "Browser deleted" });
+		res.json({ message: "Logged out from the browser" });
 	} catch (error) {
 		next(error);
 	}

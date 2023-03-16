@@ -5,9 +5,10 @@
 			<div class="flex-1"><span class="handle" v-html="label" v-on:click="activeContact = !activeContact"></span></div>
 			<span
 				v-bind:class="'small chars ' + (typedText.length > 65 ? 'red' : '')"
-				v-if="showtextbox && typedText.length > 0"
-				>{{ typedText.length }}</span
+				v-if="showtextbox && typedText.length > 0 && !isURL"
 			>
+				{{ typedText.length }}
+			</span>
 			<div
 				v-if="!showRemoveButton"
 				v-bind:class="'checkbox icon' + (ischecked ? '-check' : '') + '-circle-o'"
@@ -54,6 +55,14 @@ export default {
 	computed: {
 		showRemoveButton() {
 			return this.enableremovecontact && this.activeContact && !this.ischecked;
+		},
+		isURL() {
+			try {
+				const url = new URL(this.typedText);
+				return true;
+			} catch (err) {
+				return false;
+			}
 		},
 	},
 	methods: {

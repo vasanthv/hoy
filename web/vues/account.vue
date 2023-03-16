@@ -27,7 +27,7 @@
 		</details>
 	</div>
 
-	<div class="row">
+	<div class="row" v-if="account.blocked && account.blocked.length > 0">
 		<details>
 			<summary class="bold">&nbsp;&nbsp;&nbsp;Blocked users</summary>
 			<section id="blocked">

@@ -196,7 +196,7 @@ const deleteApiKey = async (req, res, next) => {
 
 const getMe = async (req, res, next) => {
 	try {
-		const [user, rawConnections] = await Promise.all([
+		const [user, blockedConnections] = await Promise.all([
 			Users.findOne({ _id: req.user._id }).exec(),
 			Connections.find({ users: req.user._id, blockedBy: req.user._id })
 				.populate([{ path: "users", select: "handle color" }])
@@ -204,7 +204,7 @@ const getMe = async (req, res, next) => {
 				.exec(),
 		]);
 
-		const blocked = rawConnections.map((connection) => {
+		const blocked = blockedConnections.map((connection) => {
 			const blockedUser = connection.users.find((u) => u.handle !== req.user.handle);
 			return blockedUser;
 		});
@@ -235,13 +235,15 @@ const sendHoy = async (req, res, next) => {
 		}
 
 		let recipientUsers = [];
-
 		const handles = (req.body.handles ?? []).slice(0, 100);
 		recipientUsers = await Users.find({ handle: { $in: handles } })
-			.select("handle devices blocked")
+			.select("handle devices")
 			.exec();
 
-		recipientUsers = recipientUsers.filter((u) => !u.blocked.includes(req.user._id));
+		const allowedRecipients = await helper.getAllowedRecipients(req.user, recipientUsers);
+		const allowedRecipientHandles = allowedRecipients.map((r) => r.handle);
+
+		recipientUsers = recipientUsers.filter((u) => allowedRecipientHandles.includes(u.handle));
 
 		if (recipientUsers.length === 0) {
 			return res.status(400).json({ message: "Invalid recipients" });
@@ -250,7 +252,6 @@ const sendHoy = async (req, res, next) => {
 		const text = req.body.text;
 		await helper.sendHoy(req.user, recipientUsers, text);
 
-		// await helper.addHistory(req.user, recipientUsers, text);
 		await Users.updateOne({ _id: req.user._id }, { $inc: { hoyCount: 1 } });
 
 		res.json({

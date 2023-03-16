@@ -119,15 +119,25 @@ const sendHoy = async (user, toUsers = [], text) => {
 
 	return updateContacts;
 };
+const getAllowedRecipients = async (user, recipients) => {
+	const query = recipients
+		? { $and: [{ users: { $in: recipients.map((u) => u._id) } }, { users: user._id }] }
+		: { users: user._id };
+	const allowedConnections = await Connections.find(query)
+		.populate([{ path: "users", select: "handle" }])
+		.select("users blockedBy")
+		.exec();
 
-// const addHistory = async (user, recipients, data) => {
-// 	return await new History({
-// 		user: user._id,
-// 		recipients: recipients.map((r) => r._id),
-// 		data,
-// 		createdAt: new Date(),
-// 	}).save();
-// };
+	const allowedRecipients = allowedConnections.reduce((recipients, connection) => {
+		const otherUser = connection.users.find((u) => u.handle !== user.handle);
+		if (!connection.blockedBy.includes(otherUser._id)) {
+			recipients.push(otherUser);
+		}
+		return recipients;
+	}, []);
+
+	return allowedRecipients;
+};
 
 const inviteUser = async (user, email) => {
 	const updateField = { $push: { invitees: email } };
@@ -162,5 +172,6 @@ module.exports = {
 	tokenAuthentication,
 	apiKeyAuthentication,
 	sendHoy,
+	getAllowedRecipients,
 	inviteUser,
 };

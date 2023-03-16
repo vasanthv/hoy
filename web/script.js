@@ -201,7 +201,7 @@ const App = Vue.createApp({
 		blockContact(handle) {
 			axios.post("/api/contact/block", { handle }).then((response) => {
 				this.setToast(response.data.message, "success");
-				this.getMe();
+				this.getHomeContacts();
 			});
 		},
 		unblockContact(handle) {

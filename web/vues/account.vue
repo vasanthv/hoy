@@ -31,12 +31,6 @@
 		<details>
 			<summary class="bold">&nbsp;&nbsp;&nbsp;Blocked users</summary>
 			<section id="blocked">
-				<div class="field flex">
-					<div class="flex-1">
-						<input type="text" placeholder="Username" v-model="blockUsername" v-on:keydown.enter="blockUser" />
-					</div>
-					<button class="icon-ban" v-on:click="blockUser"></button>
-				</div>
 				<div class="field flex vmiddle" v-for="(contact, i) in account.blocked">
 					<label class="bold flex-1">{{ contact.handle }}</label>
 					<button
@@ -53,7 +47,7 @@
 
 	<div class="row">
 		<details>
-			<summary class="bold">&nbsp;&nbsp;&nbsp;Conected browsers</summary>
+			<summary class="bold">&nbsp;&nbsp;&nbsp;Connected browsers</summary>
 			<section id="blocked">
 				<div class="field flex vmiddle" v-for="(browser, i) in account.devices">
 					<label class="bold flex-1">{{
@@ -109,28 +103,15 @@ summary {
 
 <script>
 export default {
-	props: [
-		"account",
-		"handle",
-		"updateaccount",
-		"blockcontact",
-		"unblockcontact",
-		"blockedcontacts",
-		"deletebrowser",
-		"logout",
-	],
+	props: ["account", "handle", "updateaccount", "unblockcontact", "blockedcontacts", "deletebrowser", "logout"],
 	data() {
 		return {
 			updatedAccount: this.account,
-			blockUsername: "",
 		};
 	},
 	methods: {
 		updateAccount() {
 			this.updateaccount(this.updatedAccount);
-		},
-		blockUser() {
-			if (this.blockUsername) this.blockcontact(this.blockUsername);
 		},
 		unblockUser(handle) {
 			this.unblockcontact(handle);

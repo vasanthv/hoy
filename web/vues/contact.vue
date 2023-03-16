@@ -14,6 +14,7 @@
 				v-on:click="oncheck(handle)"
 			></div>
 			<div class="icon-remove" v-if="showRemoveButton" v-on:click="removeContact"></div>
+			<div class="icon-ban" v-if="showRemoveButton" v-on:click="blockContact"></div>
 		</div>
 		<div class="textHoy" v-if="showtextbox">
 			<input
@@ -42,6 +43,7 @@ export default {
 		"ontextchange",
 		"enableremovecontact",
 		"removecontact",
+		"blockcontact",
 	],
 	data() {
 		return {
@@ -62,6 +64,9 @@ export default {
 			if (this.enableremovecontact && confirm(`Are you sure, you want to remove ${this.handle}?`)) {
 				this.removecontact(this.handle);
 			}
+		},
+		blockContact() {
+			this.blockcontact(this.handle);
 		},
 	},
 	watch: {

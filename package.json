@@ -1,6 +1,6 @@
 {
 	"name": "hoy",
-	"version": "0.1.9",
+	"version": "0.1.10",
 	"description": "Send push notifications to friends",
 	"main": "start.js",
 	"scripts": {

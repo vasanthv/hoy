@@ -249,15 +249,16 @@ const sendHoy = async (req, res, next) => {
 			return res.status(400).json({ message: "Invalid recipients" });
 		}
 
-		const text = req.body.text;
-		await helper.sendHoy(req.user, recipientUsers, text);
-
-		await Users.updateOne({ _id: req.user._id }, { $inc: { hoyCount: 1 } });
-
 		res.json({
 			message: `Hoy sent ${recipientUsers.length > 1 ? `to ${recipientUsers.length} recipients` : ""}`,
 			recipientCount: recipientUsers.length,
 		});
+
+		const text = req.body.text;
+		await Promise.all([
+			helper.sendHoy(req.user, recipientUsers, text),
+			Users.updateOne({ _id: req.user._id }, { $inc: { hoyCount: 1 } }),
+		]);
 	} catch (error) {
 		next(error);
 	}

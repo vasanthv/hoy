@@ -11,5 +11,5 @@
 				<stop offset="1" stop-color="#FD7B42" />
 		</linearGradient>
 	</defs>	
-	<circle cx="32" cy="32" r="18.5" fill="none" stroke="url(#gradient)" stroke-width="11" />
+	<circle cx="32" cy="32" r="19.5" fill="none" stroke="url(#gradient)" stroke-width="9" />
 </svg>

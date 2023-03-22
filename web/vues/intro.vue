@@ -24,11 +24,8 @@
 		</div>
 
 		<div class="row">
-			<label>Why do we need Hoy?</label>
-			<p>
-				Push notifications are one of the quickest and most effortless ways to consume information. Now that all major
-				browsers support push notifications, we can share short texts with people across devices.
-			</p>
+			<label>What can I share using Hoy?</label>
+			<p>You can send short text messages (&lt; 65 characters) and links using Hoy.</p>
 		</div>
 
 		<div class="row">

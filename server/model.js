@@ -243,7 +243,9 @@ const sendHoy = async (req, res, next) => {
 		const allowedRecipients = await helper.getAllowedRecipients(req.user, recipientUsers);
 		const allowedRecipientHandles = allowedRecipients.map((r) => r.handle);
 
-		recipientUsers = recipientUsers.filter((u) => allowedRecipientHandles.includes(u.handle));
+		recipientUsers = recipientUsers.filter(
+			(u) => allowedRecipientHandles.includes(u.handle) || u.handle === req.user.handle
+		);
 
 		if (recipientUsers.length === 0) {
 			return res.status(400).json({ message: "Invalid recipients" });

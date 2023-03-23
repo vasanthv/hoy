@@ -20,11 +20,13 @@
 		<div class="textHoy" v-if="showtextbox">
 			<input
 				type="text"
+				class="flex-1"
 				placeholder="Type something..."
 				v-model="typedText"
 				@input="onTextChange"
 				@keydown.enter="sendhoy(hoyhandle)"
 			/>
+			<button @click="sendhoy(hoyhandle)">Send</button>
 		</div>
 	</div>
 </template>

@@ -25,7 +25,7 @@
 
 		<div class="row">
 			<label>What can I share using Hoy?</label>
-			<p>You can send short text messages (&lt; 65 characters) and links using Hoy.</p>
+			<p>You can send short text messages (&lt; 65 characters), emojis or web links using Hoy.</p>
 		</div>
 
 		<div class="row">

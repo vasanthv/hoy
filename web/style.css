@@ -200,7 +200,10 @@ header .button:last-child {
 	color: rgba(var(--white), calc(var(--opacity) * 3));
 }
 #home .item.checked .textHoy {
-	display: block;
+	display: flex;
+}
+#home .item.checked .textHoy button {
+	padding: 0px 0.5rem;
 }
 #home .item.checked .checkbox {
 	color: rgb(var(--white));

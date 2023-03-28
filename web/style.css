@@ -204,6 +204,7 @@ header .button:last-child {
 }
 #home .item.checked .textHoy button {
 	padding: 0px 0.5rem;
+	background: none;
 }
 #home .item.checked .checkbox {
 	color: rgb(var(--white));

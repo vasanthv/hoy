@@ -1,6 +1,6 @@
 # Hoy
 
-Send push notifications to friends with just a push of a button. Hoy **does not use** Firebase Cloud Messaging (FCM).
+Send push notifications to friends with just a push of a button. Hoy **does not use** Firebase Cloud Messaging (FCM) for handling push notifications.
 
 ---
 

@@ -53,6 +53,14 @@
 			<p>Hoy is a side project of Vasanth (<a href="https://twitter.com/vsnthv" target="_blank">@vsnthv</a>).</p>
 		</div>
 
+		<div class="row">
+			<label>Is this open-source?</label>
+			<p>
+				Yes you can find the source code here
+				<a href="https://github.com/vasanthv/hoy" target="_blank">https://github.com/vasanthv/hoy</a>.
+			</p>
+		</div>
+
 		<div class="row small light">
 			&copy; hoy.im &middot; <a href="/terms">Terms</a> &middot;
 			<a href="mailto:vasanth@hoy.im" target="_blank">Contact</a>

@@ -1,6 +1,6 @@
 # Hoy
 
-Send push notifications to friends with just a push of a button
+Send push notifications to friends with just a push of a button. Hoy **does not use** Firebase Cloud Messaging (FCM).
 
 ---
 
@@ -23,7 +23,11 @@ git clone https://github.com/<your_name>/hoy.git
 npm install
 ```
 
-Run the app
+### Generate Vapid Keys for push notifications.
+
+For sending push notifications to browsers you need a pair (private & public) of vapid keys. Use `npm run gen:vapid` to generate the vapid keys. Update the keys in the `server/config.js` to pass them as environment variables to the node process.
+
+### Run the app
 
 ```bash
 npm start

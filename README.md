@@ -35,6 +35,9 @@ npm start
 
 to start the hoy server. Your hoy instance will be running on http://localhost:80 (or just http://localhost).
 
+### Thanks
+- https://github.com/thedamian/Web-Push-Example
+
 ### LICENSE
 
 <a href="https://github.com/vasanthv/hoy/blob/master/LICENSE">MIT License</a>

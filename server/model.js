@@ -409,20 +409,6 @@ const deletePushCredentials = async (req, res, next) => {
 	}
 };
 
-// const getProfile = async (req, res, next) => {
-// 	try {
-// 		const handle = req.query.handle.toLowerCase();
-// 		const user = await Users.findOne({ handle }).select("handle color name");
-// 		if (!user) {
-// 			return helper.httpError(404, "UNKNOWN_USER");
-// 		}
-
-// 		res.json({ user });
-// 	} catch (error) {
-// 		next(error);
-// 	}
-// };
-
 const logout = async (req, res, next) => {
 	try {
 		await Users.updateOne({ _id: req.user._id }, { $pull: { devices: { token: req.token } } });
@@ -459,10 +445,8 @@ module.exports = {
 	getHomeContacts,
 	addContact,
 	removeContact,
-	// getHistory,
 	blockUser,
 	unblockUser,
-	// getProfile,
 	deletePushCredentials,
 	logout,
 	getStats,

@@ -7,8 +7,6 @@ module.exports = {
 	SECRET: process.env.SECRET || "some-secret",
 	AWS_ACCESS_KEY: process.env.AWS_ACCESS_KEY,
 	AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
-	VAPID_PUBLIC_KEY: process.env.VAPID_PUBLIC_KEY,
-	VAPID_PRIVATE_KEY: process.env.VAPID_PRIVATE_KEY,
 	PUSH_OPTIONS: {
 		vapidDetails: {
 			subject: "mailto:vasanth@hoy.im",

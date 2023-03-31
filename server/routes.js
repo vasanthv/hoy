@@ -5,7 +5,7 @@ const router = require("express").Router();
 
 const config = require("./config");
 const model = require("./model");
-const { tokenAuthentication, apiKeyAuthentication } = require("./helper");
+const { tokenAuthentication } = require("./helper");
 
 const rateLimit = (options) => {
 	return rateLimiter({
@@ -17,7 +17,7 @@ const rateLimit = (options) => {
 };
 
 router.get("/verify/:code", model.verifyEmail);
-router.get("/meta", (req, res) => res.json({ vapidKey: config.VAPID_PUBLIC_KEY }));
+router.get("/meta", (req, res) => res.json({ vapidKey: config.PUSH_OPTIONS.vapidDetails.publicKey }));
 
 router.get("/stats", model.getStats);
 
@@ -50,7 +50,6 @@ router.post("/contact/add", tokenAuthentication, model.addContact);
 router.post("/contact/remove", tokenAuthentication, model.removeContact);
 router.post("/contact/block", tokenAuthentication, model.blockUser);
 router.post("/contact/unblock", tokenAuthentication, model.unblockUser);
-// router.get("/profile", tokenAuthentication, model.getProfile);
 
 router.delete("/browser/:id", tokenAuthentication, model.deletePushCredentials);
 router.get("/logout", tokenAuthentication, model.logout);

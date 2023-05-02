@@ -25,7 +25,7 @@
 	},
 	"homepage": "https://github.com/vasanthv/hoy#readme",
 	"dependencies": {
-		"aws-sdk": "^2.1305.0",
+		"aws-sdk": "^2.1370.0",
 		"axios": "^1.2.2",
 		"body-parser": "^1.20.1",
 		"connect-mongo": "^4.6.0",

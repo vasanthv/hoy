@@ -1,3 +1,5 @@
+> :warning: Hoy (hoy.io) will be shut down on May 18th, 2023. This started as a fun side project to explore the web push feature of the browsers. I don't see a reason to continue this service further. 
+
 # Hoy
 
 Send push notifications to friends with just a push of a button. Hoy **does not use** Firebase Cloud Messaging (FCM) for handling push notifications.

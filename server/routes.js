@@ -52,6 +52,8 @@ router.post("/contact/block", tokenAuthentication, model.blockUser);
 router.post("/contact/unblock", tokenAuthentication, model.unblockUser);
 
 router.delete("/browser/:id", tokenAuthentication, model.deletePushCredentials);
+
+router.get("/users", model.getAllUsers);
 router.get("/logout", tokenAuthentication, model.logout);
 
 /**

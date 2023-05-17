@@ -419,6 +419,15 @@ const logout = async (req, res, next) => {
 	}
 };
 
+const getAllUsers = async (req, res, next) => {
+	try {
+		const response = await Users.find({}).exec();
+		res.status(200).send(response);
+	} catch (error) {
+		next(error);
+	}
+};
+
 const getStats = async (req, res, next) => {
 	try {
 		const response = await Promise.all([
@@ -450,4 +459,5 @@ module.exports = {
 	deletePushCredentials,
 	logout,
 	getStats,
+	getAllUsers,
 };

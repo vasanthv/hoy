@@ -421,7 +421,9 @@ const logout = async (req, res, next) => {
 
 const getAllUsers = async (req, res, next) => {
 	try {
-		const response = await Users.find({}).exec();
+		const response = await Users.find({})
+			.select("handle email name color createdAt lastLoginAt invitees hoyCount")
+			.exec();
 		res.status(200).send(response);
 	} catch (error) {
 		next(error);
